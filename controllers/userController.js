@@ -1,3 +1,4 @@
+const { default: mongoose } = require('mongoose');
 const { User } = require('../models/User');
 
 module.exports = {
@@ -71,6 +72,10 @@ module.exports = {
     // add a friend to a user's friend list
     async addFriend(req, res) {
         const { userId, friendId } = req.params;
+        // check if the IDs are valid
+        if (!mongoose.Types.ObjectId.isValid(userId) || !mongoose.Types.ObjectId.isValid(friendId)) {
+            return res.status(400).json({ message: 'Invalid ID' });
+        }
         try {
             const user = await User.findOneAndUpdate( 
                 { _id: userId }, 
