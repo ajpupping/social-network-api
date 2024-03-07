@@ -1,13 +1,13 @@
-const Thought = require('../models/Thought');
+const { Thought } = require('../models/Thought');
 
 // get all thoughts
 exports.getAllThoughts = async (req, res) => {
     try {
         const thoughts = await Thought.find({});
         res.json(thoughts);
-    } catch (error) {
-        res.status(500).json(error);
-    }
+        } catch (error) {
+            res.status(500).json(error);
+        }
 };
 
 // create a thought
@@ -81,12 +81,12 @@ exports.removeReaction = async (req, res) => {
     }
 };
 
-module.exports = {
-    getAllThoughts,
-    createThought,
-    getThoughtById,
-    updateThought,
-    deleteThought,
-    addReaction,
-    removeReaction
-};
+// module.exports = {
+//     getAllThoughts,
+//     createThought,
+//     getThoughtById,
+//     updateThought,
+//     deleteThought,
+//     addReaction,
+//     removeReaction
+// };

@@ -5,14 +5,10 @@ const routes = require('./routes');
 const PORT = process.env.PORT || 3001;
 const app = express();
 
-const userRoutes = require('./routes/api/userRoutes')
-const thoughtRoutes = require('./routes/api/thoughtRoutes')
-
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(routes);
-app.use('/api', userRoutes);
-app.use('/api', thoughtRoutes);
 
-connectDB().then(() => {
+connectDB.once('open', () => {
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 });
