@@ -1,3 +1,13 @@
+const connection = require('../config/connection');
+const { User } = require('../models');
+const { Thought } = require('../models');
+
+connection.on('error', (error) => error);
+
+connection.once('open', async () => {
+    console.log('MongoDB connected')
+});
+
 const users = [
     {
         username: "Luz",
@@ -70,3 +80,18 @@ const thoughts = [
         reactions: []
     }
 ];
+
+
+const seedDB = async () => {
+    await User.deleteMany({});
+    await Thought.deleteMany({});
+    console.log('Data cleared');
+    await User.insertMany(users);
+    await Thought.insertMany(thoughts);
+    console.log('Data seeded');
+};
+
+seedDB().then(() => {
+    mongoose.connection.close();
+    console.log('MongoDB disconnected');
+});
