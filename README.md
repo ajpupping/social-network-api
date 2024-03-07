@@ -1,14 +1,13 @@
 # Social Network API
 
-## Description 
+## Description
 
-An API for a social network web application 
+An API for a social network web application
 
-## Installation 
+## Installation
 
 ## Usage
 
-## Credits 
+## Credits
 
-## License 
-
+## License

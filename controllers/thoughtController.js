@@ -25,7 +25,7 @@ module.exports = {
         try {
             const thought = await Thought.findOne(
                 { _id: req.params.id }
-                );
+            );
             // check if thought exists
             if (!thought) {
                 return res.status(404).json({ message: 'No thought found' });
@@ -57,7 +57,7 @@ module.exports = {
         try {
             const thought = await Thought.findOneAndDelete(
                 { _id: req.params.id }
-                );
+            );
 
             // check if thought exists
             if (!thought) {
@@ -67,7 +67,7 @@ module.exports = {
         } catch (error) {
             res.status(400).json(error);
         }
-    }, 
+    },
     // add a reaction to a thought
     async addReaction(req, res) {
         try {

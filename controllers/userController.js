@@ -68,7 +68,7 @@ module.exports = {
         } catch (error) {
             res.status(400).json(error);
         }
-    }, 
+    },
     // add a friend to a user's friend list
     async addFriend(req, res) {
         const { userId, friendId } = req.params;
@@ -77,16 +77,16 @@ module.exports = {
             return res.status(400).json({ message: 'Invalid ID' });
         }
         try {
-            const user = await User.findOneAndUpdate( 
-                { _id: userId }, 
-                { $addToSet: { friends: friendId } }, 
+            const user = await User.findOneAndUpdate(
+                { _id: userId },
+                { $addToSet: { friends: friendId } },
                 { new: true }
-                );
-                // check if user exists
-                if (!user) {
-                    return res.status(404).json({ message: 'User not found' });
-                }
-                res.json(user);
+            );
+            // check if user exists
+            if (!user) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+            res.json(user);
         } catch (error) {
             res.status(500).json(error);
         }
@@ -95,7 +95,7 @@ module.exports = {
     async removeFriend(req, res) {
         const { userId, friendId } = req.params;
         try {
-            const user = await User.findOneAndUpdate( 
+            const user = await User.findOneAndUpdate(
                 { _id: userId },
                 { $pull: { friends: friendId } },
                 { new: true }

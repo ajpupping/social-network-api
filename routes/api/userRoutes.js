@@ -5,25 +5,25 @@ const {
     createUser,
     getUserById,
     updateUser,
-    deleteUser, 
-    addFriend, 
+    deleteUser,
+    addFriend,
     removeFriend
 } = require('../../controllers/userController');
 
 // get all users
-router.get('/', getAllUsers);
+router.get('/users', getAllUsers);
 
 // create a user
-router.post('/', createUser);
+router.post('/users', createUser);
 
 // get one user by id
-router.get('/:id', getUserById);
+router.get('/users/:id', getUserById);
 
 // update a user by id
-router.put('/:id', updateUser);
+router.put('/users/:id', updateUser);
 
 // delete a user by id
-router.delete('/:id', deleteUser);
+router.delete('/users/:id', deleteUser);
 
 // add a friend to a user's friend list
 router.post('/:userId/friends/:friendId', addFriend);

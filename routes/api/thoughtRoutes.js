@@ -11,19 +11,19 @@ const {
 } = require('../../controllers/thoughtController');
 
 // get all thoughts
-router.get('/', getAllThoughts);
+router.get('/thoughts', getAllThoughts);
 
 // create a thought
-router.post('/', createThought);
+router.post('/thoughts', createThought);
 
 // get one thought by id
-router.get('/:id', getThoughtById);
+router.get('/thoughts/:id', getThoughtById);
 
 // update a thought by id
-router.put('/:id', updateThought);
+router.put('/thoughts/:id', updateThought);
 
 // delete a thought by id
-router.delete('/:id', deleteThought);
+router.delete('/thoughts/:id', deleteThought);
 
 // add a reaction to a thought
 router.post('/:thoughtId/reactions', addReaction);
