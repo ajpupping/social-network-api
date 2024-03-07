@@ -44,10 +44,9 @@ module.exports = {
                 { $set: req.body },
                 { runValidators: true, new: true }
             );
-
             // check if user exists
             if (!user) {
-                res.status(404).json({ message: 'No user found' });
+                return res.status(404).json({ message: 'No user found' });
             }
             res.json(user);
         } catch (error) {
@@ -67,6 +66,41 @@ module.exports = {
             res.json(user);
         } catch (error) {
             res.status(400).json(error);
+        }
+    }, 
+    // add a friend to a user's friend list
+    async addFriend(req, res) {
+        const { userId, friendId } = req.params;
+        try {
+            const user = await User.findOneAndUpdate( 
+                { _id: userId }, 
+                { $addToSet: { friends: friendId } }, 
+                { new: true }
+                );
+                // check if user exists
+                if (!user) {
+                    return res.status(404).json({ message: 'User not found' });
+                }
+                res.json(user);
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    },
+    // remove a friend from a user's friend list
+    async removeFriend(req, res) {
+        const { userId, friendId } = req.params;
+        try {
+            const user = await User.findOneAndUpdate( 
+                { _id: userId },
+                { $pull: { friends: friendId } },
+                { new: true }
+            );
+            if (!user) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+            res.json(user);
+        } catch (error) {
+            res.status(500).json(error);
         }
     }
 };
